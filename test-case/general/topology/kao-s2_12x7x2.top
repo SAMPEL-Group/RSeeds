@@ -1,0 +1,10 @@
+
+#include "./kao.itp"
+#include "./tip4pice-settle.itp"
+#include "../../run/step2/nucleus.itp"
+[ system ]
+kao-s2 + Water
+
+[ molecules ]
+KAO    336
+

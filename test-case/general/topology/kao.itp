@@ -1,0 +1,93 @@
+
+; Kaolinite topology with CLAYFF
+; Created by Ryan DeFever
+; Sarupria Research Group
+; @Clemson University
+; 2017 Jun 26
+
+[ defaults ]
+; nbfunc	comb-rule	gen-pairs	fudgeLJ	fudgeQQ
+1		    2		    yes		    1.0	    1.0
+
+; For kaolinite
+; Note the functional form of the LJ potential is different in CLAYFF
+; than in GROMACS. Conversion between the two can be seen in plottest.gnu
+
+[ atomtypes ]
+; atype     mass       charge     ptype              sigma           epsilon
+ST          28.0855    2.1000     A                  3.302027e-01    7.700652e-06
+AO          26.9815    1.575      A                  4.271236e-01    5.563883e-06
+OB          15.9994   -1.05       A                  3.165541e-01    6.501936e-01
+OH          15.9994   -0.95       A                  3.165541e-01    6.501936e-01
+HO          1.00794    0.425      A                  0.000000e+00    0.000000e+00
+
+; For TIP4P/Ice water
+; Parameters for TIP4P/Ice from J. Chem. Phys. 122, 234511 (2005)
+; Converted sigma from reported sigma = 3.1668 A
+; Converted eps from reported: eps/kb = 106.1 K
+; For conversion, GROMACS 5.x value of R = 0.008 314 507 kJ mol−1 K-1 was used
+
+[ atomtypes ]
+; atype     mass       charge     ptype              sigma           epsilon
+OWT4        15.9994    0.0000     A                  0.31668         0.8821692
+HWT4        1.00794    0.5897     A                  0.000           0.000
+MWW         0.000     -1.1794     D                  0.000           0.000
+
+; Define the kaolinite surface (single unit cell)
+; Not specifying any charges or masses -- defaults are correct!!!
+
+[ moleculetype ]
+; molname  nrexcl
+KAO         2
+
+[ atoms ]
+; id    atype    resnr  resname  aname  chgrp   q(e), m(u)
+1       OB       1      KAO      Oa     1
+2       OB       1      KAO      Oa     2
+3       OB       1      KAO      Oa     3
+4       OB       1      KAO      Oa     4
+5       OB       1      KAO      Oa     5
+6       OB       1      KAO      Oa     6
+7       ST       1      KAO      Si     7
+8       ST       1      KAO      Si     8
+9       ST       1      KAO      Si     9
+10      ST       1      KAO      Si     10
+11      OB       1      KAO      Ob     11
+12      OB       1      KAO      Ob     12
+13      OB       1      KAO      Ob     13
+14      OB       1      KAO      Ob     14
+15      OH       1      KAO      Oc     15
+16      OH       1      KAO      Oc     16
+17      HO       1      KAO      Hc     17
+18      HO       1      KAO      Hc     18
+19      AO       1      KAO      Al     19      
+20      AO       1      KAO      Al     20      
+21      AO       1      KAO      Al     21      
+22      AO       1      KAO      Al     22
+23      OH       1      KAO      Oh     23
+24      OH       1      KAO      Oh     24
+25      OH       1      KAO      Oh     25
+26      OH       1      KAO      Oh     26
+27      OH       1      KAO      Oh     27
+28      OH       1      KAO      Oh     28
+29      HO       1      KAO      Ho     29
+30      HO       1      KAO      Ho     30
+31      HO       1      KAO      Ho     31
+32      HO       1      KAO      Ho     32
+33      HO       1      KAO      Ho     33
+34      HO       1      KAO      Ho     34
+
+; Now let's define the requisite bonds
+; (a.k.a. the O-H bonds as constraints)
+; only surface hydroxyl's are flexible
+
+[ constraints ] 
+; i	j	funct	length
+23  29  1       0.10000
+24  30  1       0.10000
+25  31  1       0.10000
+26  32  1       0.10000
+27  33  1       0.10000
+28  34  1       0.10000
+
+

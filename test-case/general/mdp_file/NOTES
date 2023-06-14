@@ -1,0 +1,9 @@
+Those are the mdp files necessary for GROMACS to perform the simulation. 
+
+em stands for energy minimization
+
+anneal-300-240.mdp: This anneales the system from 300K to 240K
+
+nvtprod-t240.mdp: This is the production run at 240K
+
+Change the files at your own risk

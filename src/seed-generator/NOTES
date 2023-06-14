@@ -1,0 +1,15 @@
+This folder contains the necessary files to create spherical caps of ice.
+The folder  cut_water_cap/ contains the python script to create the spherical cap.
+
+Type 
+
+    "python cut_water_cap/cut_cap_slab.py -h"
+
+for help
+
+
+An example to create a hemispherical cap of ih001 with 1nm radius would be:
+
+    "python cut_water_cap/cut_water_cap.py -i ih001/ice.gro -x 3 -y 3 -z 0 -r 1 "
+
+There will be two output files, cut2.gro will be the ice configuration and cut1.gro will be the rest of the SOL molecules

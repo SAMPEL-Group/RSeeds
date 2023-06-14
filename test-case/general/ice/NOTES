@@ -1,0 +1,9 @@
+The 'Ih100_162.gro' contains a hemispherical ice seed (hexagonal ice) with 100 plane exposed. 
+The position of the ice is set to fit on the kaom surface. 
+To change to rotation, you can used the command available in GROMACS
+    "gmx editconf -f Ih100_162.gro -o rotated.gro -rotate 0 0 60"
+This will change the seed along the z axis by 60 degree counterclockwise
+
+To change the position
+    "gmx editconf -f Ih100_162.gro -o rotated.gro -translate 1 1 1"
+This will change the seed x, y, and z position by +1nm. 

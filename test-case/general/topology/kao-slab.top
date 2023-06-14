@@ -1,0 +1,11 @@
+
+#include "./kao.itp"
+#include "./tip4pice-settle.itp"
+[ system ]
+kao-s2 + Water
+
+[ molecules ]
+KAO    336
+SOL    296    
+SOL     162
+SOL    4592

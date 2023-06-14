@@ -1,0 +1,23 @@
+;; FOR GROMACS 5.x
+
+constraints         	=  h-bonds
+integrator          	=  steep
+nsteps              	=  100000
+pbc		            	=  xyz
+ns-type             	=  grid
+cutoff-scheme	    	=  Verlet
+verlet-buffer-tolerance =  0.005
+vdwtype                 =  Cut-off                  ; Cutoff for LJ
+vdw-modifier            =  Potential-shift-Verlet   ; Potential shift with Verlet scheme
+coulombtype             =  PME						; Use PME for long-range electrostatics
+rcoulomb            	=  1.0
+rvdw                	=  1.0
+
+;
+;	Energy minimizing stuff
+;
+
+emtol              =  10
+emstep             =  0.01
+
+lincs-order        =6

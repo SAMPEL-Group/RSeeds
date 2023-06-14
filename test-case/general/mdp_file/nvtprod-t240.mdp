@@ -1,0 +1,65 @@
+; For GROMACS 2018 NVT EQ
+; Ryan DeFever
+; Sarupria Research Group
+; Clemson University
+; 2018-10-03
+
+;;;;;;;;;; RUN CONTROL ;;;;;;;;;;;;;;;
+dt                      =  0.002                    ; time step
+nsteps                  =  25000000                   ; number of steps
+comm-grps               =  System
+comm-mode               =  Linear
+nstcomm                 =  10                       ; reset c.o.m. motion
+nstcalcenergy           =  10       			    ; calculate energy -- this must be less than nstcomm
+
+;;;;;;;;;; OUTPUTS ;;;;;;;;;;;;;;;
+nstxout                 =  00                       ; write coords
+nstvout                 =  00                       ; write velocities
+nstlog                  =  1000                     ; print to logfile
+nstenergy               =  500                      ; print energies
+compressed-x-grps       =  System                   ; write coords (xtc)
+nstxout-compressed      =  5000                      ; xtc frequency
+
+;;;;;;;;;; PBC/NLists/Cutoffs ;;;;;;;;;;;;;;;
+pbc		                =  xyz                      ; pbc type
+ns_type                 =  grid                     ; pairlist method
+nstlist                 =  20                       ; update pairlist (with verlet this is a min)
+cutoff-scheme	        =  Verlet					; Use Verlet method for pair lists
+verlet-buffer-tolerance =  0.005					; Default for npt simulation
+rvdw                    =  1.0    	                ; cut-off for vdw
+rcoulomb                =  1.0                      ; cut-off for coulomb
+DispCorr                =  EnerPres                 ; long range correction
+
+; Electrostatics
+
+coulombtype	            = PME	                    ; Particle Mesh Ewald for long-range electrostatics
+pme_order	            = 4		                    ; cubic interpolation
+fourierspacing	        = 0.16	                    ; grid spacing for FFT
+
+;;;;;;;;;; TCOUPL ;;;;;;;;;;;;;;;
+Tcoupl                  =  V-rescale				; Equilibration -- use v-rescale
+tc-grps                 =  KAOHYD SOL KAOFRZ        ; t-coupl groups
+ref-t                   =  240 240  0.0              ; desired temperature
+tau-t                   =  1.0 1.0 1.0            	; time constant for t-coupl
+gen-vel                 =  no                      ; generate init. vel
+gen-temp                =  240                      ; init. temp.
+gen-seed                =  -1                       ; random seed
+ld-seed                 =  -1                       ; VR-seed
+
+;;;;;;;;;; PCOUPL ;;;;;;;;;;;;;;;
+Pcoupl                  =  No                       ; NVT!
+pcoupltype              =  isotropic                ; Type of pressure coupling
+ref_p                   =  1.0                      ; desired pressure
+tau_p                   =  2.0						; time constant for p-coupl
+compressibility         =  4.5e-5                	; compressibility of water
+
+;;;;;;;;;; CONSTRAINTS ;;;;;;;;;;;;;;;
+constraint_algorithm    =  lincs                    ; use lincs for constraints
+constraints             =  h-bonds                  ; constrain all bonds with h
+lincs_iter              =  1                        ; accuracy of LINCS
+lincs-order             =  6                        ; also related to accuracy
+lincs-warnangle         =  50
+;;;;;;;;; FREEZE GROUPS ;;;;;;;;;;;;;
+freeze-grps             = KAOFRZ
+freeze-dim              = Y Y Y 
+
